@@ -1,0 +1,39 @@
+<% layout("layouts/boilerplate")%>
+<body>
+    <h3 class="offset-3 mt-4">Create Election</h1>
+    <div class=" mt-4">
+    <div class="col-6 offset-3">
+    <form action="/elec/createElection" method="POST" novalidate class="needs-validation" >
+    <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" id="title" name="title" class="form-control" placeholder="enter Title" required>
+    <div class="invalid-feedback">
+        Please enter a Title.
+      </div>
+    <div class="valid-feedback">
+        Title looks good!
+    </div>
+    </div>
+    <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea id="description" name="description" class="form-control" cols="20" rows="5" required></textarea>
+    <div class="invalid-feedback">
+        Please Give the description
+      </div>
+</div>
+    <div id="options" class="mb-3">
+        <label for id="options" class="form-label">Options:</label>
+        <div class="input-group">
+            <input type="text" name="options" placeholder="Option" id="options"class="form-control" required>
+            <div class="invalid-feedback">
+                Please enter the options
+              </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-outline-secondary" onclick="addOption()">Add Extra Option</button><br><br>
+    <button type="submit" class="btn btn-primary offset-3 mb-3">CreateElection</button>
+</form>
+</div>
+</div>
+<script src="/JS/addOption.js"></script>
+</body>

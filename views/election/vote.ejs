@@ -1,0 +1,41 @@
+<% layout("layouts/boilerplate")%>
+<body>
+    <script>
+        const moment = require("moment");
+      </script>      
+    <div class="vote">
+    <h3 class="offset-5 mt-4"><%= election.title%></h3>
+    <p class="offset-5 "><%= election.description %></p> 
+    <p class="offset-5"><i>by:<%= election.createdBy.username %></i><br>At:<%=createdat %></p>
+    <p class="offset-5">Drop your option here!</p>
+    <div class="mt-4 border-bottom">
+    <div class="col-5 offset-5">
+    <form action="/elec/vote/<%= election._id%>" method="POST" novalidate class="needs-validation">
+            <ul>
+                <% election.options.forEach((option) => { %>
+                    <div>
+                        <label class="form-check-label">
+                           <input type="radio" name="selectedOption" value="<%= option %>" required class="form-check-input">
+                            <%= option %>
+                            </label>
+                            <br><br>
+                        </div>
+                <% }); %>
+            </ul>
+           <button type="submit" class="btn btn-primary mb-4">Vote</button>
+           <a href="/elec/result/<%= election._id%>"class="btn btn-outline-dark  mb-4">Result</a>
+        </form>
+    </div>
+   </div>
+   <% if (currUser && currUser._id.toString() === election.createdBy.id.toString()){%>
+</div>
+        <h5 class="offset-4 mb-3 mt-4 vote-heading">Do want to make changes to your election?</h5>
+        <div class=" mb-3 mt-4">
+        <a href="/elec/edit/<%= election._id%>" class="btn btn-outline-secondary offset-5 mb-2 mt-3">Edit</a>
+        <form method="POST" action="/elec/delete/<%= election._id%>?_method=DELETE">
+        <button class="btn btn-outline-dark offset-2 mt-3 delete-btn">Delete</button>
+        </form>
+    </div>
+<%}%>
+</body>
+</html>

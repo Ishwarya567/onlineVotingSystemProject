@@ -1,0 +1,31 @@
+<% layout("layouts/boilerplate")%>
+<body>
+        <div class="desc">
+            <div class="mt-4">
+            <h2>Welcome to the Online Voting System.</h2> <br>
+              <p>This platform allows you to participate in various elections and polls securely<br>
+                Create engaging and interactive polls in minutes with E-Vote,<br>
+                the ultimate tool for crafting quick and easy surveys.<br>
+                Whether you're gathering opinions, conducting market research,<br>
+                or simply looking for fun ways to engage your audience, E-Vote has got you covered.</p><br>
+              <a href="/elec/createElection" class="create"><button class="btn btn-dark create-btn mb-4">Create New Poll</button></a>
+            </div>
+        </div>
+    <h2 class="heading mt-4 elec-heading">Available elections:</h3>
+    <div class="box mt-4">
+    <% for(election of elections){ %>
+     <a href="/elec/vote/<%= election._id%>">
+     <div class="card content">
+      <div class="card-body">
+        <p class="card-text">
+        <p class="elec-title"><b><%= election.title%></b></p>
+         <p><%= election.description%></p>
+         Created by:<i> <%= election.createdBy.username %></i><br>
+        <a href="/elec/vote/<%= election._id%>"><button class="btn btn-primary mt-2 mb-3">Vote</button></a>
+        </p>
+      </div>
+     </div>
+    </a>
+    <% } %>
+    </div>
+</body>

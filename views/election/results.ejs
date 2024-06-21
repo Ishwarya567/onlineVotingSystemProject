@@ -1,0 +1,40 @@
+<% layout("layouts/boilerplate")%>
+<body>
+    <div class="offset-3">
+    <h1 class="m-auto mb-4"><%= election.title %></h1>
+    <p class="mb-4 col-7"><%= election.description %></p>
+    <h3 class="m-auto mb-4">Results:</h3>
+    <div class="chart-container">
+        <canvas id="resultChart"></canvas>
+    </div>
+</div>
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const electionOptions = JSON.parse('<%- JSON.stringify(election.options) %>');
+            const voteCounts = JSON.parse('<%- JSON.stringify(Object.values(voteCounts)) %>');
+            const ctx = document.getElementById('resultChart').getContext('2d');
+            const resultChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: electionOptions,
+                    datasets: [{
+                        label: '# of Votes',
+                        data: voteCounts,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
